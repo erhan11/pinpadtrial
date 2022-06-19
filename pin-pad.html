@@ -1,48 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="pinpad.css" />
+
     <meta charset="UTF-8" />
     <title>Electron Test - Pin Pad</title>
     <meta
       http-equiv="Content-Security-Policy"
       content="script-src 'self' 'unsafe-inline';"
     />
-
-    <style>
-      #container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      #display {
-        margin-bottom: 2em;
-        padding: 0.25em;
-        width: 9em;
-        font-size: 1.25em;
-        text-align: center;
-      }
-
-      #pin-pad {
-        display: grid;
-        grid-template-rows: 4em 4em 4em 4em;
-        grid-template-columns: 4em 4em 4em;
-        grid-gap: 3px;
-        user-select: none;
-      }
-
-      #pin-pad div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #999;
-        font-size: 1.25em;
-      }
-
-      #pin-pad div:hover {
-        background-color: #ccc;
-      }
-    </style>
   </head>
 
   <body>
