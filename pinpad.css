@@ -1,0 +1,39 @@
+html {
+  height: 100vh;
+  background: linear-gradient(180deg, #1f3169 0%, #273250 100%);
+  display: flex;
+}
+body {
+  margin: auto;
+}
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  direction: rtl;
+}
+.gradiant-circle {
+  color: #ccc;
+  border: 2px solid #7c9bf9;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  font-size: 1.6rem;
+  position: relative;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+&:hover {
+  color: white;
+  background: rgba(124, 155, 249, 0.3);
+}
+&:active {
+  background: rgba(124, 155, 249, 0.6);
+}
+
+.last {
+  grid-column-start: 2;
+}

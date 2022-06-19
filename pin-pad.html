@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Electron Test - Pin Pad</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline';"
+    />
+
+    <style>
+      #display {
+        margin-bottom: 2em;
+        padding: 0.25em;
+        width: 9em;
+        font-size: 1.25em;
+        text-align: center;
+      }
+
+      #pin-pad {
+        display: grid;
+        grid-template-rows: 4em 4em 4em 4em;
+        grid-template-columns: 4em 4em 4em;
+        grid-gap: 3px;
+        user-select: none;
+      }
+
+      #pin-pad div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #999;
+        font-size: 1.25em;
+      }
+
+      #pin-pad div:hover {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input type="text" id="display" disabled />
+
+    <div id="pin-pad">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+      <div>7</div>
+      <div>8</div>
+      <div>9</div>
+      <div>Enter</div>
+      <div>0</div>
+      <div>Clear</div>
+    </div>
+  </body>
+
+  <script>
+    let display = document.getElementById("display");
+    let validKeys = [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      "Enter",
+      "Clear",
+    ];
+    let pin = "";
+
+    document.getElementById("pin-pad").addEventListener("click", (event) => {
+      if (!validKeys.includes(event.target.innerText)) {
+        return;
+      }
+
+      if (event.target.innerText === "Enter") {
+        window.electronAPI.sendPin(pin);
+        return;
+      }
+
+      if (event.target.innerText === "Clear") {
+        pin = display.value = "";
+        return;
+      }
+
+      pin = pin + event.target.innerText;
+      display.value = "*".repeat(pin.length);
+    });
+  </script>
+</html>
