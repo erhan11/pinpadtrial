@@ -53,3 +53,27 @@ electronIpcMain.on("pin", (event, pin) => {
     window.loadFile("sales.html"); // <-- Use this HTML file now...
   }
 });
+
+/////tests
+const handlekeyUp = function (e) {
+  e.stopPropagation();
+  const input = document.getElementById("display");
+  console.log(input, e.key, input.value);
+  var reg = new RegExp("^[0-9]$");
+  const number = document.querySelector(`[data-number="${e.key}"]`);
+
+  if (reg.test(e.key)) input.value += e.key;
+  if (number) number.style.backgroundColor = "#fff";
+};
+
+const handleKeyDown = (e) => {
+  const number = document.querySelector(`[data-number="${e.key}"]`);
+  if (!number) {
+    return;
+  }
+  number.style.backgroundColor = "#eee";
+};
+
+document.addEventListener("keyup", handlekeyUp);
+
+document.addEventListener("keydown", handleKeyDown);
