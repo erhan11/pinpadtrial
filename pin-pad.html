@@ -14,7 +14,7 @@
   <body>
     <div id="container">
       <div id="wrapper">
-        <input type="text" id="display" disabled />
+        <input type="password" id="display" disabled />
 
         <div id="pin-pad">
           <div data-number="1">1</div>
@@ -70,5 +70,29 @@
       pin = pin + event.target.innerText;
       display.value = "*".repeat(pin.length);
     });
+
+    ///tests
+    const handlekeyUp = function (e) {
+      e.stopPropagation();
+      const input = document.getElementById("display");
+      console.log(input, e.key, input.value);
+      var reg = new RegExp("^[0-9]$");
+      const number = document.querySelector(`[data-number="${e.key}"]`);
+
+      if (reg.test(e.key)) input.value += e.key;
+      if (number) number.style.backgroundColor = "#fff";
+    };
+
+    const handleKeyDown = (e) => {
+      const number = document.querySelector(`[data-number="${e.key}"]`);
+      if (!number) {
+        return;
+      }
+      number.style.backgroundColor = "#eee";
+    };
+
+    document.addEventListener("keyup", handlekeyUp);
+
+    document.addEventListener("keydown", handleKeyDown);
   </script>
 </html>
