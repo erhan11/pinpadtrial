@@ -10,10 +10,6 @@ let window;
 function createWindow() {
   const window = new electronBrowserWindow({
     fullscreen: true,
-    //x: 0,
-    //y: 0,
-    //width: 800,
-    //height: 600,
     show: false,
     webPreferences: {
       nodeIntegration: false,

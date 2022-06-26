@@ -30,6 +30,10 @@ body {
   grid-gap: 3px;
   user-select: none;
 }
+#pin-pad div:hover,
+#pin-pad div.js-depressed {
+  background-color: #ccc;
+}
 
 #pin-pad div {
   display: flex;

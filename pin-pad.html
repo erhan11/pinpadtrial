@@ -17,18 +17,18 @@
         <input type="password" id="display" disabled />
 
         <div id="pin-pad">
-          <div data-number="1">1</div>
-          <div data-number="2">2</div>
-          <div data-number="3">3</div>
-          <div data-number="4">4</div>
-          <div data-number="5">5</div>
-          <div data-number="6">6</div>
-          <div data-number="7">7</div>
-          <div data-number="8">8</div>
-          <div data-number="9">9</div>
-          <div>Enter</div>
-          <div data-number="0">0</div>
-          <div>Clear</div>
+          <div data-key="1">1</div>
+          <div data-key="2">2</div>
+          <div data-key="3">3</div>
+          <div data-key="4">4</div>
+          <div data-key="5">5</div>
+          <div data-key="6">6</div>
+          <div data-key="7">7</div>
+          <div data-key="8">8</div>
+          <div data-key="9">9</div>
+          <div data-key="enter">Enter</div>
+          <div data-key="0">0</div>
+          <div data-key="c">Clear</div>
         </div>
       </div>
     </div>
@@ -47,52 +47,69 @@
       "8",
       "9",
       "0",
-      "Enter",
-      "Clear",
+      "enter",
+      "c",
     ];
     let pin = "";
 
+    // Mouse input
     document.getElementById("pin-pad").addEventListener("click", (event) => {
-      if (!validKeys.includes(event.target.innerText)) {
+      let key = event.target.dataset.key;
+
+      if (!validKeys.includes(key)) {
         return;
       }
 
-      if (event.target.innerText === "Enter") {
+      if (key === "enter") {
         window.electronAPI.sendPin(pin);
         return;
       }
 
-      if (event.target.innerText === "Clear") {
+      if (key === "c") {
         pin = display.value = "";
         return;
       }
 
-      pin = pin + event.target.innerText;
+      pin = pin + key;
       display.value = "*".repeat(pin.length);
     });
 
-    ///tests
-    const handlekeyUp = function (e) {
-      e.stopPropagation();
-      const input = document.getElementById("display");
-      console.log(input, e.key, input.value);
-      var reg = new RegExp("^[0-9]$");
-      const number = document.querySelector(`[data-number="${e.key}"]`);
+    // Keyboard input
+    document.addEventListener("keydown", (event) => {
+      let key = event.key.toLowerCase();
 
-      if (reg.test(e.key)) input.value += e.key;
-      if (number) number.style.backgroundColor = "#fff";
-    };
-
-    const handleKeyDown = (e) => {
-      const number = document.querySelector(`[data-number="${e.key}"]`);
-      if (!number) {
+      if (!validKeys.includes(key)) {
         return;
       }
-      number.style.backgroundColor = "#eee";
-    };
 
-    document.addEventListener("keyup", handlekeyUp);
+      document
+        .querySelector(`[data-key="${key}"]`)
+        .classList.add("js-depressed");
 
-    document.addEventListener("keydown", handleKeyDown);
+      if (key === "enter") {
+        window.electronAPI.sendPin(pin);
+        return;
+      }
+
+      if (key === "c") {
+        pin = display.value = "";
+        return;
+      }
+
+      pin = pin + key;
+      display.value = "*".repeat(pin.length);
+    });
+
+    document.addEventListener("keyup", (event) => {
+      let key = event.key.toLowerCase();
+
+      if (!validKeys.includes(key)) {
+        return;
+      }
+
+      document
+        .querySelector(`[data-key="${key}"]`)
+        .classList.remove("js-depressed");
+    });
   </script>
 </html>
