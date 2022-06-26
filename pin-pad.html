@@ -28,7 +28,7 @@
           <div data-key="9">9</div>
           <div data-key="enter">Enter</div>
           <div data-key="0">0</div>
-          <div data-key="c">Clear</div>
+          <div data-key="backspace">Clear</div>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
       "9",
       "0",
       "enter",
-      "c",
+      "backspace",
     ];
     let pin = "";
 
@@ -91,7 +91,7 @@
         return;
       }
 
-      if (key === "c") {
+      if (key === "backspace") {
         pin = display.value = "";
         return;
       }
