@@ -1,7 +1,9 @@
-.grid-container {
+.container {
+  height: 100vh;
+  width: 100vw;
   display: grid;
-  grid-template-rows: 5em 5em 5em 5em;
-  grid-template-columns: 5em 5em 5em 5em 5em 5em 5em 5em 5em 5em 5em 5em;
+  grid-template-rows: 50em 5em 5em 5em;
+  grid-template-columns: 30em 5em 5em 5em 5em 5em;
   grid-gap: 3px;
   user-select: none;
 }

@@ -14,7 +14,7 @@
   <body>
     <div id="container">
       <div id="wrapper">
-        <input type="password" id="display" disabled />
+        <input type="text" id="display" disabled />
 
         <div id="pin-pad">
           <div data-key="1">1</div>
@@ -28,7 +28,7 @@
           <div data-key="9">9</div>
           <div data-key="enter">Enter</div>
           <div data-key="0">0</div>
-          <div data-key="backspace">Clear</div>
+          <div data-key="clear">Clear</div>
         </div>
       </div>
     </div>
@@ -48,6 +48,7 @@
       "9",
       "0",
       "enter",
+      "clear",
       "backspace",
     ];
     let pin = "";
@@ -65,7 +66,7 @@
         return;
       }
 
-      if (key === "c") {
+      if (key === "clear") {
         pin = display.value = "";
         return;
       }
@@ -82,17 +83,18 @@
         return;
       }
 
+      if (key === "backspace") {
+        pin = pin.slice(0, -1);
+        display.value = "*".repeat(pin.length);
+        return;
+      }
+
       document
         .querySelector(`[data-key="${key}"]`)
         .classList.add("js-depressed");
 
       if (key === "enter") {
         window.electronAPI.sendPin(pin);
-        return;
-      }
-
-      if (key === "backspace") {
-        pin = display.value = "";
         return;
       }
 
@@ -103,7 +105,7 @@
     document.addEventListener("keyup", (event) => {
       let key = event.key.toLowerCase();
 
-      if (!validKeys.includes(key)) {
+      if (!validKeys.includes(key) || key === "backspace") {
         return;
       }
 
