@@ -1,3 +1,6 @@
 npm i to install dependencies
 npm start opens in electron
 npm run start:web opens in web browser
+
+Password for sales 1234
+Password for Admin Panel 1111

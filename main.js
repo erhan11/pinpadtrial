@@ -48,4 +48,7 @@ electronIpcMain.on("pin", (event, pin) => {
   if (pin === "1234") {
     window.loadFile("sales.html");
   }
+  if (pin === "1111") {
+    window.loadFile("adminpanel.html");
+  }
 });
